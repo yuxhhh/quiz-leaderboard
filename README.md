@@ -1,13 +1,12 @@
-Build a system that checks a quiz validator API 10 times removes responses combines scores and submits a correct leaderboard.
-Here's how it works:
+Build a system that polls a quiz validator API 10 times, deduplicates
+the responses, aggregates scores, and submits a correct leaderboard.
 
-1. It checks `/quiz/messages` 10 times (poll=0 to poll=9) with 5-second delays.
-2. It removes events using `roundId + participant` as a unique key.
-
-It does the following:
-- Combines total score per participant.
-- Sorts leaderboard by total score in descending order.
-- Submits to `/quiz/submit` exactly once.
+ITS WORKING--
+1. Polls `/quiz/messages` 10 times (poll=0 to poll=9) with 5-second delays
+2. Deduplicates events using `roundId + participant` as a unique composite key
+3. Aggregates total score per participant
+4. Sorts leaderboard by totalScore (descending)
+5. Submits to `/quiz/submit` exactly once
 
 KEY LOGIC (DUPLICATION)--
         ```java
@@ -20,14 +19,17 @@ KEY LOGIC (DUPLICATION)--
         }
         ```
 
-**Tech Stack Used**
+TECH STACK--
 - Java 17
-- Maven for building
-- OkHttp 4.12 for HTTP requests
-- Gson 2.10 for JSON parsing
+- Maven (build tool)
+- OkHttp 4.12 (HTTP client)
+- Gson 2.10 (JSON parsing)
 
-**Running the System**
-- Main.java` and set your `REG_NO`.
-- Run `mvn compile exec:java`, in the terminal.
-- Wait 50 seconds for all 10 checks to complete.
-- Check the submission result in the terminal output.
+How to Run-
+- Open `Main.java` and set your `REG_NO`
+- In terminal run:
+```bash
+mvn compile exec:java
+```
+- Wait ~50 seconds for all 10 polls to complete
+- Check the submission result in terminal output
