@@ -11,7 +11,8 @@ It does the following:
 - Submits to `/quiz/submit` exactly once.
 
 KEY LOGIC(DUPLICATION):
-        ```java
+        java
+        
         String key = event.roundId + "|" + event.participant;
         if (seenEvents.contains(key)) {
             // ignore duplicate
@@ -19,7 +20,7 @@ KEY LOGIC(DUPLICATION):
             seenEvents.add(key);
             scores.merge(event.participant, event.score, Integer::sum);
         }
-        ```
+        
 
 **Tech Stack Used**
 
