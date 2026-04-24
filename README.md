@@ -20,6 +20,7 @@ KEY LOGIC(DUPLICATION):
             scores.merge(event.participant, event.score, Integer::sum);
         }
         ```
+
 **Tech Stack Used**
 
 - Java 17
